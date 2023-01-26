@@ -3,10 +3,16 @@
 org 100h
 start:
       jmp mulai
-nama db "Nama Pembeli: $"
+nama db 13,10, "Nama Pembeli: $"
+alamat db 13,10,"masukan alamat anda : $"    
+nohp db 13,10,"masukan no hp  anda : $" 
+
+tampung_nama db 30,?,30 dup(?) 
+tampung_alamat db 40,?,40 dup(?)
+tampung_nohp db 50,?,50 dup(?)
 
 daftar db 13,10,'|--------------------------------------------------|'
-       db 13,10,'|-------------------daftar sepatu-------------------|'
+       db 13,10,'|-------------------daftar sepatu------------------|'
        db 13,10,'|--------------------------------------------------|'
        db 13,10,'|No |    nama sepatu      |         harga          |'
        db 13,10,'|--------------------------------------------------|'   
@@ -26,7 +32,7 @@ daftar db 13,10,'|--------------------------------------------------|'
 daftar2 db 13,10,'|--------------------------------------------------|'
         db 13,10,'|-------------------size chart---------------------|'
         db 13,10,'|--------------------------------------------------|'
-        db 13,10,'|No |  size sepatu                                |'
+        db 13,10,'|No |  size sepatu                                 |'
         db 13,10,'|--------------------------------------------------|'   
         db 13,10,'| 1 |  size 39                                     |'
         db 13,10,'|--------------------------------------------------|'
@@ -42,8 +48,8 @@ daftar2 db 13,10,'|--------------------------------------------------|'
         db 13,10,'|--------------------------------------------------|','$'
         
 error    db 13,10,'NOMOR YANG ANDA MASUKAN SALAH $'
-pilih    db 13,10,'Silahkan Pilih Makanan Yang Anda Ingin Beli: $'
-pilih2   db 13,10,'Silahkan Pilih Minuman Yang Anda Ingin Beli: $'
+pilih    db 13,10,'Silahkan Pilih sepatu Yang Anda Ingin Beli: $'
+pilih2   db 13,10,'Silahkan Pilih size Yang Anda Ingin Beli: $'
 
 mulai:
     
@@ -51,6 +57,21 @@ mulai:
     lea dx,nama
     int 21h
     mov ah,0ah
+    lea dx,tampung_nama
+    int 21h       
+    
+    mov ah,09h
+    lea dx,alamat
+    int 21h
+    mov ah,0ah
+    lea dx,tampung_alamat
+    int 21h 
+    
+    mov ah,09h
+    lea dx,nohp
+    int 21h
+    mov ah,0ah
+    lea dx,tampung_nohp
     int 21h 
      
     mov ah,09h
